@@ -43,6 +43,12 @@ def getResult(raw_vector, result_type, sampling_rate, downsample=1, optimisation
         result = leda2.analysis.phasicData
     elif result_type.lower() == 'phasicdriver':
         result = leda2.analysis.driver
+    elif result_type.lower() == 'tonicdata':
+        result = leda2.analysis.tonicData
+    elif result_type.lower() == 'tonicdriver':
+        result = leda2.analysis.tonicDriver
+    elif result_type.lower() == 'phasicdata+tonicdata':
+        result = (leda2.analysis.phasicData,leda2.analysis.tonicData)
     else:
         raise ValueError('result_type not recognised (was ' + result_type + ')')
     if pipeout is not None:
