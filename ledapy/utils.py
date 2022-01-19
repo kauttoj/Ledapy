@@ -241,4 +241,4 @@ def genTimeVector(conductance, srate):
     """
     Given a conductance vector, return its corresponding time vector representing seconds at each timepoint
     """
-    return genTime(len(conductance) / srate, srate)
+    return genTime((len(conductance)-1) / srate, len(conductance))
