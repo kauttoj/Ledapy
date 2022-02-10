@@ -158,8 +158,8 @@ def smooth(data, winwidth_in):
     if not len(data.shape) == 1:
         raise ValueError('data is not a vector. Shape: ' + str(data.shape))
     paddata = npa(np.hstack((data[0], data, data[-1])))  # pad to remove border errors
-    winwidth = int(np.floor(winwidth_in // 2) * 2)  # force even winsize for odd window
-    window = norm.pdf(np.arange(0, winwidth + 1), winwidth // 2, winwidth // 8)
+    winwidth = int(np.floor(winwidth_in / 2) * 2)  # force even winsize for odd window
+    window = norm.pdf(np.arange(0, winwidth + 1), winwidth / 2 + 1, winwidth / 8)
     window = window / np.sum(window)  # normalize window
 
     data_ext = np.hstack(((np.zeros(winwidth // 2) + 1) * paddata[0],
@@ -229,12 +229,12 @@ def time_idx(time, time0):
     return idx
 
 
-def genTime(seconds, srate):
+def genTime(seconds, length):
     """
     Generate a time vector represeting 'seconds' seconds with the given sample rate (srate).
     Each timepoint of the vector represents time in seconds, starting from 0
     """
-    return np.linspace(0, seconds, seconds * srate)
+    return np.linspace(0, seconds, length)
 
 
 def genTimeVector(conductance, srate):
